@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMarker", "CommonMarker\CommonMarker.csproj", "{95F9E836-D65B-4ECC-A3C6-981608A78B9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonMarker.Tests", "CommonMarker.Tests\CommonMarker.Tests.csproj", "{51C0431E-433D-4280-B4B6-F44B81D135A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95F9E836-D65B-4ECC-A3C6-981608A78B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95F9E836-D65B-4ECC-A3C6-981608A78B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95F9E836-D65B-4ECC-A3C6-981608A78B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95F9E836-D65B-4ECC-A3C6-981608A78B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C0431E-433D-4280-B4B6-F44B81D135A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C0431E-433D-4280-B4B6-F44B81D135A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C0431E-433D-4280-B4B6-F44B81D135A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C0431E-433D-4280-B4B6-F44B81D135A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
