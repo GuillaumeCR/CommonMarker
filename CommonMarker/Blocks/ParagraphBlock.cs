@@ -16,7 +16,7 @@ namespace CommonMarker.Blocks
         public override void BuildHtml(StringBuilder builder)
         {
             builder.Append("<p>");
-            builder.Append(string.Join(Environment.NewLine, RawLines));
+            builder.Append(string.Join(Environment.NewLine, RawLines.Select(x => x.Trim())));
             builder.Append("</p>");
         }
     }

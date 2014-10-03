@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blocks\BlockFactory.cs" />
+    <Compile Include="Blocks\HtmlBlock.cs" />
     <Compile Include="Blocks\MultiLineBlock.cs" />
     <Compile Include="Blocks\ParagraphBlock.cs" />
     <Compile Include="ConsoleApplication\Program.cs" />

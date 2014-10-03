@@ -10,6 +10,7 @@ namespace CommonMarker.Blocks
         private readonly List<Type> BlockTypes = new List<Type>
         {
             typeof(IndentedCodeBlock),
+            typeof(HtmlBlock),
             typeof(ParagraphBlock)
         };
 

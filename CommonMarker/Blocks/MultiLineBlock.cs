@@ -12,7 +12,7 @@ namespace CommonMarker.Blocks
         public List<string> RawLines { get { return _rawLines; } }
 
         public abstract bool AcceptsLine(string line);
-        public void AddLine(string line)
+        public virtual void AddLine(string line)
         {
             RawLines.Add(line);
         }
