@@ -26,7 +26,6 @@ namespace CommonMarker.Tests
             var sb = new StringBuilder(
 @"using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
 
 namespace CommonMarker.Tests
 {

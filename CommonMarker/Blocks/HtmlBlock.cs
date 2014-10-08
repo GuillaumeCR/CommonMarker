@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace CommonMarker.Blocks
 {
     class HtmlBlock : MultiLineBlock
     {
-        private readonly string[] htmlTags = "article, header, aside, hgroup, blockquote, hr, iframe, body, li, map, button, object, canvas, ol, caption, output, col, p, colgroup, pre, dd, progress, div, section, dl, table, td, dt, tbody, embed, textarea, fieldset, tfoot, figcaption, th, figure, thead, footer, footer, tr, form, ul, h1, h2, h3, h4, h5, h6, video, script, style"
-            .Split(new [] {", "}, StringSplitOptions.None);
+        private const string htmlTags = "article|header|aside|hgroup|blockquote|hr|iframe|body|li|map|button|object|canvas|ol|caption|output|col|p|colgroup|pre|dd|progress|div|section|dl|table|td|dt|tbody|embed|textarea|fieldset|tfoot|figcaption|th|figure|thead|footer|footer|tr|form|ul|h1|h2|h3|h4|h5|h6|video|script|style";
+        //Zalgo?
+        private readonly Regex htmlRegex = new Regex(" {0,3}&lt;/?(" + htmlTags + ")");
+        private readonly Regex htmlClosingTag = new Regex("&lt;/(" + htmlTags + ")");
 
         public override bool AcceptsLine(string line)
         {
@@ -36,50 +39,37 @@ namespace CommonMarker.Blocks
 
         private bool IsClosingTag(string line)
         {
-            var openingTag = GetTag(RawLines.First().Trim(), 0);
-            var tag = GetTag(line.Trim(), 0);
-            return string.Compare("/" + openingTag, 0, tag, 0, tag.Length) == 0;
+            var match = htmlClosingTag.Match(line);
+            if (match.Groups.Count < 2)
+            {
+                return false;
+            }
+
+            var closingTag = match.Groups[1].Value;
+
+            var openingTag = GetTag(RawLines.First());
+            return openingTag == closingTag;
         }
 
         private bool AcceptsFirstLine(string line)
         {
-            if (line.Length < 5)
-            {
-                return false;
-            }
-
-            //Skip up to 3 blank chars.
-            var index = 0;
-            while (index < 4 && line[index] == ' ')
-            {
-                index++;
-            }
-
-            if (line.Substring(index, 4) != "&lt;")
-            {
-                return false;
-            }
-
-            var tag = GetTag(line, index);
-
-            return htmlTags.Contains(tag);
+            return htmlRegex.Match(line).Success;
         }
 
-        private static string GetTag(string line, int index)
+        private string GetTag(string line)
         {
-            if (line.Length < index + 4)
+            var match = htmlRegex.Match(line);
+            if (match.Groups.Count > 1)
             {
-                return "";
+                return match.Groups[1].Value;
             }
 
-            return line.Substring(index + 4)
-                .Split(new[] { " ", "&gt;" }, StringSplitOptions.None)
-                .FirstOrDefault();
+            return "";
         }
 
         public override void BuildHtml(StringBuilder builder)
         {
-            builder.AppendLine(string.Join(Environment.NewLine,
+            builder.Append(string.Join(Environment.NewLine,
                 RawLines.Select(
                     x => WebUtility.HtmlDecode(x))));
         }
