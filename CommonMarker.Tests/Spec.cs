@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CommonMarker.Tests
@@ -9,14 +9,14 @@ namespace CommonMarker.Tests
         private void TestExample(string input, string expected)
         {
 
-            var target = new Md2Html();
-            var actual = target.Convert(input);
+            var target = new Md2Html();                      
+            var actual = target.Convert(input).Replace("\r\n", "\n");
 
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void Example1()
+        public void Example001()
         {
             const string input = @"	foo	baz		bim";
             const string expected = @"<pre><code>foo baz     bim
@@ -26,7 +26,7 @@ namespace CommonMarker.Tests
         }
 
         [TestMethod]
-        public void Example2()
+        public void Example002()
         {
             const string input = @"    a	a
     ὐ	a";
@@ -38,7 +38,7 @@ namespace CommonMarker.Tests
         }
 
         [TestMethod]
-        public void Example3()
+        public void Example003()
         {
             const string input = @"- `one
 - two`";
@@ -51,7 +51,7 @@ namespace CommonMarker.Tests
         }
 
         [TestMethod]
-        public void Example4()
+        public void Example004()
         {
             const string input = @"***
 ---
@@ -64,7 +64,7 @@ ___";
         }
 
         [TestMethod]
-        public void Example5()
+        public void Example005()
         {
             const string input = @"+++";
             const string expected = @"<p>+++</p>";
@@ -73,7 +73,7 @@ ___";
         }
 
         [TestMethod]
-        public void Example6()
+        public void Example006()
         {
             const string input = @"===";
             const string expected = @"<p>===</p>";
@@ -82,7 +82,7 @@ ___";
         }
 
         [TestMethod]
-        public void Example7()
+        public void Example007()
         {
             const string input = @"--
 **
@@ -95,7 +95,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example8()
+        public void Example008()
         {
             const string input = @" ***
   ***
@@ -108,7 +108,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example9()
+        public void Example009()
         {
             const string input = @"    ***";
             const string expected = @"<pre><code>***
@@ -118,7 +118,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example10()
+        public void Example010()
         {
             const string input = @"Foo
     ***";
@@ -129,7 +129,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example11()
+        public void Example011()
         {
             const string input = @"_____________________________________";
             const string expected = @"<hr />";
@@ -138,7 +138,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example12()
+        public void Example012()
         {
             const string input = @" - - -";
             const string expected = @"<hr />";
@@ -147,7 +147,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example13()
+        public void Example013()
         {
             const string input = @" **  * ** * ** * **";
             const string expected = @"<hr />";
@@ -156,7 +156,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example14()
+        public void Example014()
         {
             const string input = @"-     -      -      -";
             const string expected = @"<hr />";
@@ -165,7 +165,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example15()
+        public void Example015()
         {
             const string input = @"- - - -    ";
             const string expected = @"<hr />";
@@ -174,7 +174,7 @@ __</p>";
         }
 
         [TestMethod]
-        public void Example16()
+        public void Example016()
         {
             const string input = @"_ _ _ _ a
 
@@ -186,7 +186,7 @@ a------";
         }
 
         [TestMethod]
-        public void Example17()
+        public void Example017()
         {
             const string input = @" *-*";
             const string expected = @"<p><em>-</em></p>";
@@ -195,7 +195,7 @@ a------";
         }
 
         [TestMethod]
-        public void Example18()
+        public void Example018()
         {
             const string input = @"- foo
 ***
@@ -212,7 +212,7 @@ a------";
         }
 
         [TestMethod]
-        public void Example19()
+        public void Example019()
         {
             const string input = @"Foo
 ***
@@ -225,7 +225,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example20()
+        public void Example020()
         {
             const string input = @"Foo
 ---
@@ -237,7 +237,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example21()
+        public void Example021()
         {
             const string input = @"* Foo
 * * *
@@ -254,7 +254,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example22()
+        public void Example022()
         {
             const string input = @"- Foo
 - * * *";
@@ -267,7 +267,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example23()
+        public void Example023()
         {
             const string input = @"# foo
 ## foo
@@ -286,7 +286,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example24()
+        public void Example024()
         {
             const string input = @"####### foo";
             const string expected = @"<p>####### foo</p>";
@@ -295,7 +295,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example25()
+        public void Example025()
         {
             const string input = @"#5 bolt";
             const string expected = @"<p>#5 bolt</p>";
@@ -304,7 +304,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example26()
+        public void Example026()
         {
             const string input = @"\## foo";
             const string expected = @"<p>## foo</p>";
@@ -313,7 +313,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example27()
+        public void Example027()
         {
             const string input = @"# foo *bar* \*baz\*";
             const string expected = @"<h1>foo <em>bar</em> *baz*</h1>";
@@ -322,7 +322,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example28()
+        public void Example028()
         {
             const string input = @"#                  foo                     ";
             const string expected = @"<h1>foo</h1>";
@@ -331,7 +331,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example29()
+        public void Example029()
         {
             const string input = @" ### foo
   ## foo
@@ -344,7 +344,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example30()
+        public void Example030()
         {
             const string input = @"    # foo";
             const string expected = @"<pre><code># foo
@@ -354,7 +354,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example31()
+        public void Example031()
         {
             const string input = @"foo
     # bar";
@@ -365,7 +365,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example32()
+        public void Example032()
         {
             const string input = @"## foo ##
   ###   bar    ###";
@@ -376,7 +376,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example33()
+        public void Example033()
         {
             const string input = @"# foo ##################################
 ##### foo ##";
@@ -387,7 +387,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example34()
+        public void Example034()
         {
             const string input = @"### foo ###     ";
             const string expected = @"<h3>foo</h3>";
@@ -396,7 +396,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example35()
+        public void Example035()
         {
             const string input = @"### foo ### b";
             const string expected = @"<h3>foo ### b</h3>";
@@ -405,7 +405,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example36()
+        public void Example036()
         {
             const string input = @"### foo \###
 ## foo \#\##
@@ -418,7 +418,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example37()
+        public void Example037()
         {
             const string input = @"****
 ## foo
@@ -431,7 +431,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example38()
+        public void Example038()
         {
             const string input = @"Foo bar
 # baz
@@ -444,7 +444,7 @@ Bar foo";
         }
 
         [TestMethod]
-        public void Example39()
+        public void Example039()
         {
             const string input = @"## 
 #
@@ -457,7 +457,7 @@ Bar foo";
         }
 
         [TestMethod]
-        public void Example40()
+        public void Example040()
         {
             const string input = @"Foo *bar*
 =========
@@ -471,7 +471,7 @@ Foo *bar*
         }
 
         [TestMethod]
-        public void Example41()
+        public void Example041()
         {
             const string input = @"Foo
 -------------------------
@@ -485,7 +485,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example42()
+        public void Example042()
         {
             const string input = @"   Foo
 ---
@@ -503,7 +503,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example43()
+        public void Example043()
         {
             const string input = @"    Foo
     ---
@@ -521,7 +521,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example44()
+        public void Example044()
         {
             const string input = @"Foo
    ----      ";
@@ -531,7 +531,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example45()
+        public void Example045()
         {
             const string input = @"Foo
      ---";
@@ -542,7 +542,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example46()
+        public void Example046()
         {
             const string input = @"Foo
 = =
@@ -558,7 +558,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example47()
+        public void Example047()
         {
             const string input = @"Foo  
 -----";
@@ -568,7 +568,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example48()
+        public void Example048()
         {
             const string input = @"Foo\
 ----";
@@ -578,7 +578,7 @@ Foo
         }
 
         [TestMethod]
-        public void Example49()
+        public void Example049()
         {
             const string input = @"`Foo
 ----
@@ -596,7 +596,7 @@ of dashes&quot;/&gt;";
         }
 
         [TestMethod]
-        public void Example50()
+        public void Example050()
         {
             const string input = @"&gt; Foo
 ---";
@@ -609,7 +609,7 @@ of dashes&quot;/&gt;";
         }
 
         [TestMethod]
-        public void Example51()
+        public void Example051()
         {
             const string input = @"Foo
 Bar
@@ -629,7 +629,7 @@ Bar
         }
 
         [TestMethod]
-        public void Example52()
+        public void Example052()
         {
             const string input = @"---
 Foo
@@ -646,7 +646,7 @@ Baz";
         }
 
         [TestMethod]
-        public void Example53()
+        public void Example053()
         {
             const string input = @"
 ====";
@@ -656,7 +656,7 @@ Baz";
         }
 
         [TestMethod]
-        public void Example54()
+        public void Example054()
         {
             const string input = @"    a simple
       indented code block";
@@ -668,7 +668,7 @@ Baz";
         }
 
         [TestMethod]
-        public void Example55()
+        public void Example055()
         {
             const string input = @"    &lt;a/&gt;
     *hi*
@@ -684,7 +684,7 @@ Baz";
         }
 
         [TestMethod]
-        public void Example56()
+        public void Example056()
         {
             const string input = @"    chunk1
 
@@ -706,7 +706,7 @@ chunk3
         }
 
         [TestMethod]
-        public void Example57()
+        public void Example057()
         {
             const string input = @"    chunk1
       
@@ -720,7 +720,7 @@ chunk3
         }
 
         [TestMethod]
-        public void Example58()
+        public void Example058()
         {
             const string input = @"Foo
     bar
@@ -732,7 +732,7 @@ bar</p>";
         }
 
         [TestMethod]
-        public void Example59()
+        public void Example059()
         {
             const string input = @"    foo
 bar";
@@ -744,7 +744,7 @@ bar";
         }
 
         [TestMethod]
-        public void Example60()
+        public void Example060()
         {
             const string input = @"# Header
     foo
@@ -764,7 +764,7 @@ Header
         }
 
         [TestMethod]
-        public void Example61()
+        public void Example061()
         {
             const string input = @"        foo
     bar";
@@ -776,7 +776,7 @@ bar
         }
 
         [TestMethod]
-        public void Example62()
+        public void Example062()
         {
             const string input = @"
     
@@ -790,7 +790,7 @@ bar
         }
 
         [TestMethod]
-        public void Example63()
+        public void Example063()
         {
             const string input = @"    foo  ";
             const string expected = @"<pre><code>foo  
@@ -800,7 +800,7 @@ bar
         }
 
         [TestMethod]
-        public void Example64()
+        public void Example064()
         {
             const string input = @"```
 &lt;
@@ -814,7 +814,7 @@ bar
         }
 
         [TestMethod]
-        public void Example65()
+        public void Example065()
         {
             const string input = @"~~~
 &lt;
@@ -828,7 +828,7 @@ bar
         }
 
         [TestMethod]
-        public void Example66()
+        public void Example066()
         {
             const string input = @"```
 aaa
@@ -842,7 +842,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example67()
+        public void Example067()
         {
             const string input = @"~~~
 aaa
@@ -856,7 +856,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example68()
+        public void Example068()
         {
             const string input = @"````
 aaa
@@ -870,7 +870,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example69()
+        public void Example069()
         {
             const string input = @"~~~~
 aaa
@@ -884,7 +884,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example70()
+        public void Example070()
         {
             const string input = @"```";
             const string expected = @"<pre><code></code></pre>";
@@ -893,7 +893,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example71()
+        public void Example071()
         {
             const string input = @"`````
 
@@ -908,7 +908,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example72()
+        public void Example072()
         {
             const string input = @"```
 
@@ -922,7 +922,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example73()
+        public void Example073()
         {
             const string input = @"```
 ```";
@@ -932,7 +932,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example74()
+        public void Example074()
         {
             const string input = @" ```
  aaa
@@ -946,7 +946,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example75()
+        public void Example075()
         {
             const string input = @"  ```
 aaa
@@ -962,7 +962,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example76()
+        public void Example076()
         {
             const string input = @"   ```
    aaa
@@ -978,7 +978,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example77()
+        public void Example077()
         {
             const string input = @"    ```
     aaa
@@ -992,7 +992,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example78()
+        public void Example078()
         {
             const string input = @"``` ```
 aaa";
@@ -1003,7 +1003,7 @@ aaa</p>";
         }
 
         [TestMethod]
-        public void Example79()
+        public void Example079()
         {
             const string input = @"~~~~~~
 aaa
@@ -1016,7 +1016,7 @@ aaa
         }
 
         [TestMethod]
-        public void Example80()
+        public void Example080()
         {
             const string input = @"foo
 ```
@@ -1032,7 +1032,7 @@ baz";
         }
 
         [TestMethod]
-        public void Example81()
+        public void Example081()
         {
             const string input = @"foo
 ---
@@ -1049,7 +1049,7 @@ bar
         }
 
         [TestMethod]
-        public void Example82()
+        public void Example082()
         {
             const string input = @"```ruby
 def foo(x)
@@ -1065,7 +1065,7 @@ end
         }
 
         [TestMethod]
-        public void Example83()
+        public void Example083()
         {
             const string input = @"~~~~    ruby startline=3 $%@#$
 def foo(x)
@@ -1081,7 +1081,7 @@ end
         }
 
         [TestMethod]
-        public void Example84()
+        public void Example084()
         {
             const string input = @"````;
 ````";
@@ -1091,7 +1091,7 @@ end
         }
 
         [TestMethod]
-        public void Example85()
+        public void Example085()
         {
             const string input = @"``` aa ```
 foo";
@@ -1102,7 +1102,7 @@ foo</p>";
         }
 
         [TestMethod]
-        public void Example86()
+        public void Example086()
         {
             const string input = @"```
 ``` aaa
@@ -1114,7 +1114,7 @@ foo</p>";
         }
 
         [TestMethod]
-        public void Example87()
+        public void Example087()
         {
             const string input = @"&lt;table&gt;
   &lt;tr&gt;
@@ -1138,7 +1138,7 @@ okay.";
         }
 
         [TestMethod]
-        public void Example88()
+        public void Example088()
         {
             const string input = @" &lt;div&gt;
   *hello*
@@ -1151,7 +1151,7 @@ okay.";
         }
 
         [TestMethod]
-        public void Example89()
+        public void Example089()
         {
             const string input = @"&lt;DIV CLASS=&quot;foo&quot;&gt;
 
@@ -1166,7 +1166,7 @@ okay.";
         }
 
         [TestMethod]
-        public void Example90()
+        public void Example090()
         {
             const string input = @"&lt;div&gt;&lt;/div&gt;
 ``` c
@@ -1181,7 +1181,7 @@ int x = 33;
         }
 
         [TestMethod]
-        public void Example91()
+        public void Example091()
         {
             const string input = @"&lt;!-- Foo
 bar
@@ -1194,7 +1194,7 @@ bar
         }
 
         [TestMethod]
-        public void Example92()
+        public void Example092()
         {
             const string input = @"&lt;?php
   echo &#39;foo&#39;
@@ -1207,7 +1207,7 @@ bar
         }
 
         [TestMethod]
-        public void Example93()
+        public void Example093()
         {
             const string input = @"&lt;![CDATA[
 function matchwo(a,b)
@@ -1240,7 +1240,7 @@ else
         }
 
         [TestMethod]
-        public void Example94()
+        public void Example094()
         {
             const string input = @"  &lt;!-- foo --&gt;
 
@@ -1253,7 +1253,7 @@ else
         }
 
         [TestMethod]
-        public void Example95()
+        public void Example095()
         {
             const string input = @"Foo
 &lt;div&gt;
@@ -1268,7 +1268,7 @@ bar
         }
 
         [TestMethod]
-        public void Example96()
+        public void Example096()
         {
             const string input = @"&lt;div&gt;
 bar
@@ -1283,7 +1283,7 @@ bar
         }
 
         [TestMethod]
-        public void Example97()
+        public void Example097()
         {
             const string input = @"&lt;div class
 foo";
@@ -1294,7 +1294,7 @@ foo";
         }
 
         [TestMethod]
-        public void Example98()
+        public void Example098()
         {
             const string input = @"&lt;div&gt;
 
@@ -1309,7 +1309,7 @@ foo";
         }
 
         [TestMethod]
-        public void Example99()
+        public void Example099()
         {
             const string input = @"&lt;div&gt;
 *Emphasized* text.
@@ -3114,8 +3114,8 @@ bar</p>";
         [TestMethod]
         public void Example215()
         {
-            const string input = @"&lt;http://google.com?find=\*&gt;";
-            const string expected = @"<p><a href=""http://google.com?find=%5C*"">http://google.com?find=\*</a></p>";
+            const string input = @"&lt;http://example.com?find=\*&gt;";
+            const string expected = @"<p><a href=""http://example.com?find=%5C*"">http://example.com?find=\*</a></p>";
 
             TestExample(input, expected);
         }
@@ -3721,6 +3721,42 @@ bar</strong></p>";
         [TestMethod]
         public void Example280()
         {
+            const string input = @"*_*";
+            const string expected = @"<p><em>_</em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example281()
+        {
+            const string input = @"_*_";
+            const string expected = @"<p><em>*</em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example282()
+        {
+            const string input = @"*__*";
+            const string expected = @"<p><em>__</em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example283()
+        {
+            const string input = @"_**_";
+            const string expected = @"<p><em>**</em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example284()
+        {
             const string input = @"foo*bar*baz";
             const string expected = @"<p>foo<em>bar</em>baz</p>";
 
@@ -3728,7 +3764,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example281()
+        public void Example285()
         {
             const string input = @"foo_bar_baz";
             const string expected = @"<p>foo_bar_baz</p>";
@@ -3737,7 +3773,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example282()
+        public void Example286()
         {
             const string input = @"foo__bar__baz";
             const string expected = @"<p>foo__bar__baz</p>";
@@ -3746,7 +3782,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example283()
+        public void Example287()
         {
             const string input = @"_foo_bar_baz_";
             const string expected = @"<p><em>foo_bar_baz</em></p>";
@@ -3755,7 +3791,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example284()
+        public void Example288()
         {
             const string input = @"11*15*32";
             const string expected = @"<p>11<em>15</em>32</p>";
@@ -3764,7 +3800,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example285()
+        public void Example289()
         {
             const string input = @"11_15_32";
             const string expected = @"<p>11_15_32</p>";
@@ -3773,7 +3809,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example286()
+        public void Example290()
         {
             const string input = @"_foo_bar_baz_";
             const string expected = @"<p><em>foo_bar_baz</em></p>";
@@ -3782,7 +3818,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example287()
+        public void Example291()
         {
             const string input = @"__foo__bar__baz__";
             const string expected = @"<p><strong>foo__bar__baz</strong></p>";
@@ -3791,7 +3827,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example288()
+        public void Example292()
         {
             const string input = @"***foo bar***";
             const string expected = @"<p><strong><em>foo bar</em></strong></p>";
@@ -3800,7 +3836,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example289()
+        public void Example293()
         {
             const string input = @"___foo bar___";
             const string expected = @"<p><strong><em>foo bar</em></strong></p>";
@@ -3809,7 +3845,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example290()
+        public void Example294()
         {
             const string input = @"***foo** bar*";
             const string expected = @"<p><em><strong>foo</strong> bar</em></p>";
@@ -3818,7 +3854,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example291()
+        public void Example295()
         {
             const string input = @"___foo__ bar_";
             const string expected = @"<p><em><strong>foo</strong> bar</em></p>";
@@ -3827,7 +3863,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example292()
+        public void Example296()
         {
             const string input = @"***foo* bar**";
             const string expected = @"<p><strong><em>foo</em> bar</strong></p>";
@@ -3836,46 +3872,10 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example293()
+        public void Example297()
         {
             const string input = @"___foo_ bar__";
             const string expected = @"<p><strong><em>foo</em> bar</strong></p>";
-
-            TestExample(input, expected);
-        }
-
-        [TestMethod]
-        public void Example294()
-        {
-            const string input = @"*foo **bar***";
-            const string expected = @"<p><em>foo <strong>bar</strong></em></p>";
-
-            TestExample(input, expected);
-        }
-
-        [TestMethod]
-        public void Example295()
-        {
-            const string input = @"_foo __bar___";
-            const string expected = @"<p><em>foo <strong>bar</strong></em></p>";
-
-            TestExample(input, expected);
-        }
-
-        [TestMethod]
-        public void Example296()
-        {
-            const string input = @"**foo *bar***";
-            const string expected = @"<p><strong>foo <em>bar</em></strong></p>";
-
-            TestExample(input, expected);
-        }
-
-        [TestMethod]
-        public void Example297()
-        {
-            const string input = @"__foo _bar___";
-            const string expected = @"<p><strong>foo <em>bar</em></strong></p>";
 
             TestExample(input, expected);
         }
@@ -3901,6 +3901,42 @@ bar</strong></p>";
         [TestMethod]
         public void Example300()
         {
+            const string input = @"**foo *bar***";
+            const string expected = @"<p><strong>foo <em>bar</em></strong></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example301()
+        {
+            const string input = @"__foo _bar___";
+            const string expected = @"<p><strong>foo <em>bar</em></strong></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example302()
+        {
+            const string input = @"*foo **bar***";
+            const string expected = @"<p><em>foo <strong>bar</strong></em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example303()
+        {
+            const string input = @"_foo __bar___";
+            const string expected = @"<p><em>foo <strong>bar</strong></em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example304()
+        {
             const string input = @"*foo *bar* baz*";
             const string expected = @"<p><em>foo <em>bar</em> baz</em></p>";
 
@@ -3908,7 +3944,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example301()
+        public void Example305()
         {
             const string input = @"_foo _bar_ baz_";
             const string expected = @"<p><em>foo <em>bar</em> baz</em></p>";
@@ -3917,7 +3953,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example302()
+        public void Example306()
         {
             const string input = @"**foo **bar** baz**";
             const string expected = @"<p><strong>foo <strong>bar</strong> baz</strong></p>";
@@ -3926,7 +3962,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example303()
+        public void Example307()
         {
             const string input = @"__foo __bar__ baz__";
             const string expected = @"<p><strong>foo <strong>bar</strong> baz</strong></p>";
@@ -3935,7 +3971,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example304()
+        public void Example308()
         {
             const string input = @"*foo **bar** baz*";
             const string expected = @"<p><em>foo <strong>bar</strong> baz</em></p>";
@@ -3944,7 +3980,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example305()
+        public void Example309()
         {
             const string input = @"_foo __bar__ baz_";
             const string expected = @"<p><em>foo <strong>bar</strong> baz</em></p>";
@@ -3953,7 +3989,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example306()
+        public void Example310()
         {
             const string input = @"**foo *bar* baz**";
             const string expected = @"<p><strong>foo <em>bar</em> baz</strong></p>";
@@ -3962,7 +3998,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example307()
+        public void Example311()
         {
             const string input = @"__foo _bar_ baz__";
             const string expected = @"<p><strong>foo <em>bar</em> baz</strong></p>";
@@ -3971,7 +4007,43 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example308()
+        public void Example312()
+        {
+            const string input = @"**foo, *bar*, baz**";
+            const string expected = @"<p><strong>foo, <em>bar</em>, baz</strong></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example313()
+        {
+            const string input = @"__foo, _bar_, baz__";
+            const string expected = @"<p><strong>foo, <em>bar</em>, baz</strong></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example314()
+        {
+            const string input = @"*foo**bar**baz*";
+            const string expected = @"<p><em>foo</em><em>bar</em><em>baz</em></p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example315()
+        {
+            const string input = @"**foo*bar*baz**";
+            const string expected = @"<p><em><em>foo</em>bar</em>baz**</p>";
+
+            TestExample(input, expected);
+        }
+
+        [TestMethod]
+        public void Example316()
         {
             const string input = @"**foo**";
             const string expected = @"<p><strong>foo</strong></p>";
@@ -3980,7 +4052,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example309()
+        public void Example317()
         {
             const string input = @"****foo****";
             const string expected = @"<p>****foo****</p>";
@@ -3989,7 +4061,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example310()
+        public void Example318()
         {
             const string input = @"*_foo_*";
             const string expected = @"<p><em><em>foo</em></em></p>";
@@ -3998,7 +4070,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example311()
+        public void Example319()
         {
             const string input = @"**__foo__**";
             const string expected = @"<p><strong><strong>foo</strong></strong></p>";
@@ -4007,7 +4079,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example312()
+        public void Example320()
         {
             const string input = @"*foo**";
             const string expected = @"<p><em>foo</em>*</p>";
@@ -4016,7 +4088,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example313()
+        public void Example321()
         {
             const string input = @"*foo *bar**";
             const string expected = @"<p><em>foo <em>bar</em></em></p>";
@@ -4025,7 +4097,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example314()
+        public void Example322()
         {
             const string input = @"**foo***";
             const string expected = @"<p><strong>foo</strong>*</p>";
@@ -4034,7 +4106,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example315()
+        public void Example323()
         {
             const string input = @"***foo* bar***";
             const string expected = @"<p><strong><em>foo</em> bar</strong>*</p>";
@@ -4043,7 +4115,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example316()
+        public void Example324()
         {
             const string input = @"***foo** bar***";
             const string expected = @"<p><em><strong>foo</strong> bar</em>**</p>";
@@ -4052,7 +4124,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example317()
+        public void Example325()
         {
             const string input = @"*foo**bar***";
             const string expected = @"<p><em>foo</em><em>bar</em>**</p>";
@@ -4061,7 +4133,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example318()
+        public void Example326()
         {
             const string input = @"*foo****";
             const string expected = @"<p>*foo****</p>";
@@ -4070,40 +4142,31 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example319()
+        public void Example327()
         {
             const string input = @"*foo**
 
 **foo*";
             const string expected = @"<p><em>foo</em>*</p>
-<p>**foo*</p>";
+<p>*<em>foo</em></p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example320()
+        public void Example328()
         {
             const string input = @"*foo *bar**
 
 **foo* bar*";
             const string expected = @"<p><em>foo <em>bar</em></em></p>
-<p>**foo* bar*</p>";
+<p><em><em>foo</em> bar</em></p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example321()
-        {
-            const string input = @"**foo* bar*";
-            const string expected = @"<p>**foo* bar*</p>";
-
-            TestExample(input, expected);
-        }
-
-        [TestMethod]
-        public void Example322()
+        public void Example329()
         {
             const string input = @"*bar***";
             const string expected = @"<p><em>bar</em>**</p>";
@@ -4112,16 +4175,16 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example323()
+        public void Example330()
         {
             const string input = @"***foo*";
-            const string expected = @"<p>***foo*</p>";
+            const string expected = @"<p>**<em>foo</em></p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example324()
+        public void Example331()
         {
             const string input = @"**bar***";
             const string expected = @"<p><strong>bar</strong>*</p>";
@@ -4130,16 +4193,16 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example325()
+        public void Example332()
         {
             const string input = @"***foo**";
-            const string expected = @"<p>***foo**</p>";
+            const string expected = @"<p>*<strong>foo</strong></p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example326()
+        public void Example333()
         {
             const string input = @"***foo *bar*";
             const string expected = @"<p>***foo <em>bar</em></p>";
@@ -4148,7 +4211,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example327()
+        public void Example334()
         {
             const string input = @"[link](/uri &quot;title&quot;)";
             const string expected = @"<p><a href=""/uri"" title=""title"">link</a></p>";
@@ -4157,7 +4220,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example328()
+        public void Example335()
         {
             const string input = @"[link](/uri)";
             const string expected = @"<p><a href=""/uri"">link</a></p>";
@@ -4166,7 +4229,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example329()
+        public void Example336()
         {
             const string input = @"[link]()";
             const string expected = @"<p><a href="""">link</a></p>";
@@ -4175,7 +4238,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example330()
+        public void Example337()
         {
             const string input = @"[link](&lt;&gt;)";
             const string expected = @"<p><a href="""">link</a></p>";
@@ -4184,7 +4247,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example331()
+        public void Example338()
         {
             const string input = @"[link](/my uri)";
             const string expected = @"<p>[link](/my uri)</p>";
@@ -4193,7 +4256,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example332()
+        public void Example339()
         {
             const string input = @"[link](&lt;/my uri&gt;)";
             const string expected = @"<p><a href=""/my%20uri"">link</a></p>";
@@ -4202,7 +4265,7 @@ bar</strong></p>";
         }
 
         [TestMethod]
-        public void Example333()
+        public void Example340()
         {
             const string input = @"[link](foo
 bar)";
@@ -4213,7 +4276,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example334()
+        public void Example341()
         {
             const string input = @"[link]((foo)and(bar))";
             const string expected = @"<p><a href=""(foo)and(bar)"">link</a></p>";
@@ -4222,7 +4285,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example335()
+        public void Example342()
         {
             const string input = @"[link](foo(and(bar)))";
             const string expected = @"<p>[link](foo(and(bar)))</p>";
@@ -4231,7 +4294,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example336()
+        public void Example343()
         {
             const string input = @"[link](foo(and\(bar\)))";
             const string expected = @"<p><a href=""foo(and(bar))"">link</a></p>";
@@ -4240,7 +4303,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example337()
+        public void Example344()
         {
             const string input = @"[link](&lt;foo(and(bar))&gt;)";
             const string expected = @"<p><a href=""foo(and(bar))"">link</a></p>";
@@ -4249,7 +4312,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example338()
+        public void Example345()
         {
             const string input = @"[link](foo\)\:)";
             const string expected = @"<p><a href=""foo):"">link</a></p>";
@@ -4258,7 +4321,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example339()
+        public void Example346()
         {
             const string input = @"[link](foo%20b&amp;auml;)";
             const string expected = @"<p><a href=""foo%20b%C3%A4"">link</a></p>";
@@ -4267,7 +4330,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example340()
+        public void Example347()
         {
             const string input = @"[link](&quot;title&quot;)";
             const string expected = @"<p><a href=""%22title%22"">link</a></p>";
@@ -4276,7 +4339,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example341()
+        public void Example348()
         {
             const string input = @"[link](/url &quot;title&quot;)
 [link](/url &#39;title&#39;)
@@ -4289,7 +4352,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example342()
+        public void Example349()
         {
             const string input = @"[link](/url &quot;title \&quot;&amp;quot;&quot;)";
             const string expected = @"<p><a href=""/url"" title=""title &quot;&quot;"">link</a></p>";
@@ -4298,7 +4361,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example343()
+        public void Example350()
         {
             const string input = @"[link](/url &quot;title &quot;and&quot; title&quot;)";
             const string expected = @"<p>[link](/url &quot;title &quot;and&quot; title&quot;)</p>";
@@ -4307,7 +4370,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example344()
+        public void Example351()
         {
             const string input = @"[link](/url &#39;title &quot;and&quot; title&#39;)";
             const string expected = @"<p><a href=""/url"" title=""title &quot;and&quot; title"">link</a></p>";
@@ -4316,7 +4379,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example345()
+        public void Example352()
         {
             const string input = @"[link](   /uri
   &quot;title&quot;  )";
@@ -4326,7 +4389,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example346()
+        public void Example353()
         {
             const string input = @"[link] (/uri)";
             const string expected = @"<p>[link] (/uri)</p>";
@@ -4335,7 +4398,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example347()
+        public void Example354()
         {
             const string input = @"[foo &lt;bar attr=&quot;](baz)&quot;&gt;";
             const string expected = @"<p>[foo <bar attr=""](baz)""></p>";
@@ -4344,7 +4407,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example348()
+        public void Example355()
         {
             const string input = @"[foo][bar]
 
@@ -4355,7 +4418,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example349()
+        public void Example356()
         {
             const string input = @"[*foo\!*][bar]
 
@@ -4366,7 +4429,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example350()
+        public void Example357()
         {
             const string input = @"[foo][BaR]
 
@@ -4377,7 +4440,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example351()
+        public void Example358()
         {
             const string input = @"[Толпой][Толпой] is a Russian word.
 
@@ -4388,7 +4451,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example352()
+        public void Example359()
         {
             const string input = @"[Foo
   bar]: /url
@@ -4400,7 +4463,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example353()
+        public void Example360()
         {
             const string input = @"[foo] [bar]
 
@@ -4411,7 +4474,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example354()
+        public void Example361()
         {
             const string input = @"[foo]
 [bar]
@@ -4423,7 +4486,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example355()
+        public void Example362()
         {
             const string input = @"[foo]: /url1
 
@@ -4436,7 +4499,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example356()
+        public void Example363()
         {
             const string input = @"[bar][foo\!]
 
@@ -4447,7 +4510,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example357()
+        public void Example364()
         {
             const string input = @"[foo][]
 
@@ -4458,7 +4521,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example358()
+        public void Example365()
         {
             const string input = @"[*foo* bar][]
 
@@ -4469,7 +4532,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example359()
+        public void Example366()
         {
             const string input = @"[Foo][]
 
@@ -4480,7 +4543,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example360()
+        public void Example367()
         {
             const string input = @"[foo] 
 []
@@ -4492,7 +4555,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example361()
+        public void Example368()
         {
             const string input = @"[foo]
 
@@ -4503,7 +4566,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example362()
+        public void Example369()
         {
             const string input = @"[*foo* bar]
 
@@ -4514,7 +4577,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example363()
+        public void Example370()
         {
             const string input = @"[[*foo* bar]]
 
@@ -4525,7 +4588,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example364()
+        public void Example371()
         {
             const string input = @"[Foo]
 
@@ -4536,7 +4599,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example365()
+        public void Example372()
         {
             const string input = @"\[foo]
 
@@ -4547,7 +4610,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example366()
+        public void Example373()
         {
             const string input = @"[foo*]: /url
 
@@ -4558,7 +4621,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example367()
+        public void Example374()
         {
             const string input = @"[foo`]: /url
 
@@ -4569,7 +4632,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example368()
+        public void Example375()
         {
             const string input = @"[[[foo]]]
 
@@ -4580,7 +4643,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example369()
+        public void Example376()
         {
             const string input = @"[[[foo]]]
 
@@ -4592,7 +4655,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example370()
+        public void Example377()
         {
             const string input = @"[\[foo]
 
@@ -4603,7 +4666,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example371()
+        public void Example378()
         {
             const string input = @"[foo][bar]
 
@@ -4615,7 +4678,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example372()
+        public void Example379()
         {
             const string input = @"[foo][bar][baz]
 
@@ -4626,7 +4689,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example373()
+        public void Example380()
         {
             const string input = @"[foo][bar][baz]
 
@@ -4638,7 +4701,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example374()
+        public void Example381()
         {
             const string input = @"[foo][bar][baz]
 
@@ -4650,7 +4713,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example375()
+        public void Example382()
         {
             const string input = @"![foo](/url &quot;title&quot;)";
             const string expected = @"<p><img src=""/url"" alt=""foo"" title=""title"" /></p>";
@@ -4659,7 +4722,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example376()
+        public void Example383()
         {
             const string input = @"![foo *bar*]
 
@@ -4670,7 +4733,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example377()
+        public void Example384()
         {
             const string input = @"![foo *bar*][]
 
@@ -4681,7 +4744,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example378()
+        public void Example385()
         {
             const string input = @"![foo *bar*][foobar]
 
@@ -4692,7 +4755,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example379()
+        public void Example386()
         {
             const string input = @"![foo](train.jpg)";
             const string expected = @"<p><img src=""train.jpg"" alt=""foo"" /></p>";
@@ -4701,7 +4764,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example380()
+        public void Example387()
         {
             const string input = @"My ![foo bar](/path/to/train.jpg  &quot;title&quot;   )";
             const string expected = @"<p>My <img src=""/path/to/train.jpg"" alt=""foo bar"" title=""title"" /></p>";
@@ -4710,7 +4773,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example381()
+        public void Example388()
         {
             const string input = @"![foo](&lt;url&gt;)";
             const string expected = @"<p><img src=""url"" alt=""foo"" /></p>";
@@ -4719,7 +4782,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example382()
+        public void Example389()
         {
             const string input = @"![](/url)";
             const string expected = @"<p><img src=""/url"" alt="""" /></p>";
@@ -4728,7 +4791,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example383()
+        public void Example390()
         {
             const string input = @"![foo] [bar]
 
@@ -4739,7 +4802,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example384()
+        public void Example391()
         {
             const string input = @"![foo] [bar]
 
@@ -4750,7 +4813,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example385()
+        public void Example392()
         {
             const string input = @"![foo][]
 
@@ -4761,7 +4824,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example386()
+        public void Example393()
         {
             const string input = @"![*foo* bar][]
 
@@ -4772,7 +4835,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example387()
+        public void Example394()
         {
             const string input = @"![Foo][]
 
@@ -4783,7 +4846,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example388()
+        public void Example395()
         {
             const string input = @"![foo] 
 []
@@ -4795,7 +4858,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example389()
+        public void Example396()
         {
             const string input = @"![foo]
 
@@ -4806,7 +4869,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example390()
+        public void Example397()
         {
             const string input = @"![*foo* bar]
 
@@ -4817,7 +4880,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example391()
+        public void Example398()
         {
             const string input = @"![[foo]]
 
@@ -4828,7 +4891,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example392()
+        public void Example399()
         {
             const string input = @"![Foo]
 
@@ -4839,7 +4902,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example393()
+        public void Example400()
         {
             const string input = @"\!\[foo]
 
@@ -4850,7 +4913,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example394()
+        public void Example401()
         {
             const string input = @"\![foo]
 
@@ -4861,7 +4924,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example395()
+        public void Example402()
         {
             const string input = @"&lt;http://foo.bar.baz&gt;";
             const string expected = @"<p><a href=""http://foo.bar.baz"">http://foo.bar.baz</a></p>";
@@ -4870,7 +4933,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example396()
+        public void Example403()
         {
             const string input = @"&lt;http://foo.bar.baz?q=hello&amp;id=22&amp;boolean&gt;";
             const string expected = @"<p><a href=""http://foo.bar.baz?q=hello&amp;id=22&amp;boolean"">http://foo.bar.baz?q=hello&amp;id=22&amp;boolean</a></p>";
@@ -4879,7 +4942,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example397()
+        public void Example404()
         {
             const string input = @"&lt;irc://foo.bar:2233/baz&gt;";
             const string expected = @"<p><a href=""irc://foo.bar:2233/baz"">irc://foo.bar:2233/baz</a></p>";
@@ -4888,7 +4951,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example398()
+        public void Example405()
         {
             const string input = @"&lt;MAILTO:FOO@BAR.BAZ&gt;";
             const string expected = @"<p><a href=""MAILTO:FOO@BAR.BAZ"">MAILTO:FOO@BAR.BAZ</a></p>";
@@ -4897,7 +4960,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example399()
+        public void Example406()
         {
             const string input = @"&lt;http://foo.bar/baz bim&gt;";
             const string expected = @"<p>&lt;http://foo.bar/baz bim&gt;</p>";
@@ -4906,16 +4969,16 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example400()
+        public void Example407()
         {
-            const string input = @"&lt;foo@bar.baz.com&gt;";
-            const string expected = @"<p><a href=""mailto:foo@bar.baz.com"">foo@bar.baz.com</a></p>";
+            const string input = @"&lt;foo@bar.example.com&gt;";
+            const string expected = @"<p><a href=""mailto:foo@bar.example.com"">foo@bar.example.com</a></p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example401()
+        public void Example408()
         {
             const string input = @"&lt;foo+special@Bar.baz-bar0.com&gt;";
             const string expected = @"<p><a href=""mailto:foo+special@Bar.baz-bar0.com"">foo+special@Bar.baz-bar0.com</a></p>";
@@ -4924,7 +4987,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example402()
+        public void Example409()
         {
             const string input = @"&lt;&gt;";
             const string expected = @"<p>&lt;&gt;</p>";
@@ -4933,7 +4996,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example403()
+        public void Example410()
         {
             const string input = @"&lt;heck://bing.bong&gt;";
             const string expected = @"<p>&lt;heck://bing.bong&gt;</p>";
@@ -4942,7 +5005,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example404()
+        public void Example411()
         {
             const string input = @"&lt; http://foo.bar &gt;";
             const string expected = @"<p>&lt; http://foo.bar &gt;</p>";
@@ -4951,7 +5014,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example405()
+        public void Example412()
         {
             const string input = @"&lt;foo.bar.baz&gt;";
             const string expected = @"<p>&lt;foo.bar.baz&gt;</p>";
@@ -4960,7 +5023,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example406()
+        public void Example413()
         {
             const string input = @"&lt;localhost:5001/foo&gt;";
             const string expected = @"<p>&lt;localhost:5001/foo&gt;</p>";
@@ -4969,25 +5032,25 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example407()
+        public void Example414()
         {
-            const string input = @"http://google.com";
-            const string expected = @"<p>http://google.com</p>";
+            const string input = @"http://example.com";
+            const string expected = @"<p>http://example.com</p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example408()
+        public void Example415()
         {
-            const string input = @"foo@bar.baz.com";
-            const string expected = @"<p>foo@bar.baz.com</p>";
+            const string input = @"foo@bar.example.com";
+            const string expected = @"<p>foo@bar.example.com</p>";
 
             TestExample(input, expected);
         }
 
         [TestMethod]
-        public void Example409()
+        public void Example416()
         {
             const string input = @"&lt;a&gt;&lt;bab&gt;&lt;c2c&gt;";
             const string expected = @"<p><a><bab><c2c></p>";
@@ -4996,7 +5059,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example410()
+        public void Example417()
         {
             const string input = @"&lt;a/&gt;&lt;b2/&gt;";
             const string expected = @"<p><a/><b2/></p>";
@@ -5005,7 +5068,7 @@ bar)</p>";
         }
 
         [TestMethod]
-        public void Example411()
+        public void Example418()
         {
             const string input = @"&lt;a  /&gt;&lt;b2
 data=&quot;foo&quot; &gt;";
@@ -5016,7 +5079,7 @@ data=""foo"" ></p>";
         }
 
         [TestMethod]
-        public void Example412()
+        public void Example419()
         {
             const string input = @"&lt;a foo=&quot;bar&quot; bam = &#39;baz &lt;em&gt;&quot;&lt;/em&gt;&#39;
 _boolean zoop:33=zoop:33 /&gt;";
@@ -5027,7 +5090,7 @@ _boolean zoop:33=zoop:33 /></p>";
         }
 
         [TestMethod]
-        public void Example413()
+        public void Example420()
         {
             const string input = @"&lt;33&gt; &lt;__&gt;";
             const string expected = @"<p>&lt;33&gt; &lt;__&gt;</p>";
@@ -5036,7 +5099,7 @@ _boolean zoop:33=zoop:33 /></p>";
         }
 
         [TestMethod]
-        public void Example414()
+        public void Example421()
         {
             const string input = @"&lt;a h*#ref=&quot;hi&quot;&gt;";
             const string expected = @"<p>&lt;a h*#ref=&quot;hi&quot;&gt;</p>";
@@ -5045,7 +5108,7 @@ _boolean zoop:33=zoop:33 /></p>";
         }
 
         [TestMethod]
-        public void Example415()
+        public void Example422()
         {
             const string input = @"&lt;a href=&quot;hi&#39;&gt; &lt;a href=hi&#39;&gt;";
             const string expected = @"<p>&lt;a href=&quot;hi'&gt; &lt;a href=hi'&gt;</p>";
@@ -5054,7 +5117,7 @@ _boolean zoop:33=zoop:33 /></p>";
         }
 
         [TestMethod]
-        public void Example416()
+        public void Example423()
         {
             const string input = @"&lt; a&gt;&lt;
 foo&gt;&lt;bar/ &gt;";
@@ -5065,7 +5128,7 @@ foo&gt;&lt;bar/ &gt;</p>";
         }
 
         [TestMethod]
-        public void Example417()
+        public void Example424()
         {
             const string input = @"&lt;a href=&#39;bar&#39;title=title&gt;";
             const string expected = @"<p>&lt;a href='bar'title=title&gt;</p>";
@@ -5074,7 +5137,7 @@ foo&gt;&lt;bar/ &gt;</p>";
         }
 
         [TestMethod]
-        public void Example418()
+        public void Example425()
         {
             const string input = @"&lt;/a&gt;
 &lt;/foo &gt;";
@@ -5085,7 +5148,7 @@ foo&gt;&lt;bar/ &gt;</p>";
         }
 
         [TestMethod]
-        public void Example419()
+        public void Example426()
         {
             const string input = @"&lt;/a href=&quot;foo&quot;&gt;";
             const string expected = @"<p>&lt;/a href=&quot;foo&quot;&gt;</p>";
@@ -5094,7 +5157,7 @@ foo&gt;&lt;bar/ &gt;</p>";
         }
 
         [TestMethod]
-        public void Example420()
+        public void Example427()
         {
             const string input = @"foo &lt;!-- this is a
 comment - with hyphen --&gt;";
@@ -5105,7 +5168,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example421()
+        public void Example428()
         {
             const string input = @"foo &lt;!-- not a comment -- two hyphens --&gt;";
             const string expected = @"<p>foo &lt;!-- not a comment -- two hyphens --&gt;</p>";
@@ -5114,7 +5177,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example422()
+        public void Example429()
         {
             const string input = @"foo &lt;?php echo $a; ?&gt;";
             const string expected = @"<p>foo <?php echo $a; ?></p>";
@@ -5123,7 +5186,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example423()
+        public void Example430()
         {
             const string input = @"foo &lt;!ELEMENT br EMPTY&gt;";
             const string expected = @"<p>foo <!ELEMENT br EMPTY></p>";
@@ -5132,7 +5195,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example424()
+        public void Example431()
         {
             const string input = @"foo &lt;![CDATA[&gt;&amp;&lt;]]&gt;";
             const string expected = @"<p>foo <![CDATA[>&<]]></p>";
@@ -5141,7 +5204,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example425()
+        public void Example432()
         {
             const string input = @"&lt;a href=&quot;&amp;ouml;&quot;&gt;";
             const string expected = @"<p><a href=""&ouml;""></p>";
@@ -5150,7 +5213,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example426()
+        public void Example433()
         {
             const string input = @"&lt;a href=&quot;\*&quot;&gt;";
             const string expected = @"<p><a href=""\*""></p>";
@@ -5159,7 +5222,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example427()
+        public void Example434()
         {
             const string input = @"&lt;a href=&quot;\&quot;&quot;&gt;";
             const string expected = @"<p>&lt;a href=&quot;&quot;&quot;&gt;</p>";
@@ -5168,7 +5231,7 @@ comment - with hyphen --></p>";
         }
 
         [TestMethod]
-        public void Example428()
+        public void Example435()
         {
             const string input = @"foo  
 baz";
@@ -5179,7 +5242,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example429()
+        public void Example436()
         {
             const string input = @"foo\
 baz";
@@ -5190,7 +5253,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example430()
+        public void Example437()
         {
             const string input = @"foo       
 baz";
@@ -5201,7 +5264,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example431()
+        public void Example438()
         {
             const string input = @"foo  
      bar";
@@ -5212,7 +5275,7 @@ bar</p>";
         }
 
         [TestMethod]
-        public void Example432()
+        public void Example439()
         {
             const string input = @"foo\
      bar";
@@ -5223,7 +5286,7 @@ bar</p>";
         }
 
         [TestMethod]
-        public void Example433()
+        public void Example440()
         {
             const string input = @"*foo  
 bar*";
@@ -5234,7 +5297,7 @@ bar</em></p>";
         }
 
         [TestMethod]
-        public void Example434()
+        public void Example441()
         {
             const string input = @"*foo\
 bar*";
@@ -5245,7 +5308,7 @@ bar</em></p>";
         }
 
         [TestMethod]
-        public void Example435()
+        public void Example442()
         {
             const string input = @"`code  
 span`";
@@ -5255,7 +5318,7 @@ span`";
         }
 
         [TestMethod]
-        public void Example436()
+        public void Example443()
         {
             const string input = @"`code\
 span`";
@@ -5265,7 +5328,7 @@ span`";
         }
 
         [TestMethod]
-        public void Example437()
+        public void Example444()
         {
             const string input = @"&lt;a href=&quot;foo  
 bar&quot;&gt;";
@@ -5276,7 +5339,7 @@ bar""></p>";
         }
 
         [TestMethod]
-        public void Example438()
+        public void Example445()
         {
             const string input = @"&lt;a href=&quot;foo\
 bar&quot;&gt;";
@@ -5287,7 +5350,7 @@ bar""></p>";
         }
 
         [TestMethod]
-        public void Example439()
+        public void Example446()
         {
             const string input = @"foo
 baz";
@@ -5298,7 +5361,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example440()
+        public void Example447()
         {
             const string input = @"foo 
  baz";
@@ -5309,7 +5372,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example441()
+        public void Example448()
         {
             const string input = @"hello $.;&#39;there";
             const string expected = @"<p>hello $.;'there</p>";
@@ -5318,7 +5381,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example442()
+        public void Example449()
         {
             const string input = @"Foo χρῆν";
             const string expected = @"<p>Foo χρῆν</p>";
@@ -5327,7 +5390,7 @@ baz</p>";
         }
 
         [TestMethod]
-        public void Example443()
+        public void Example450()
         {
             const string input = @"Multiple     spaces";
             const string expected = @"<p>Multiple     spaces</p>";

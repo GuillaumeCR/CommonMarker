@@ -36,7 +36,7 @@ namespace CommonMarker.Tests
         {
 
             var target = new Md2Html();
-            var actual = target.Convert(input);
+            var actual = target.Convert(input).Replace(""\r\n"", ""\n"");
 
             Assert.AreEqual(expected, actual);
         }
@@ -49,7 +49,7 @@ namespace CommonMarker.Tests
                     .Replace("\"", "\"\"");
                 var html = WebUtility.HtmlDecode(example.Html)
                     .Replace("\"", "\"\""); ;
-                var exampleTest = TestMethodTemplate.Replace("@Number", example.Number.ToString())
+                var exampleTest = TestMethodTemplate.Replace("@Number", example.Number.ToString("D3"))
                     .Replace("@markdown", markdown)
                     .Replace("@html", html);
                 sb.Append(exampleTest);

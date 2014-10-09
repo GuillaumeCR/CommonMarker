@@ -9,6 +9,8 @@ namespace CommonMarker.Blocks
     {
         private readonly List<Type> BlockTypes = new List<Type>
         {
+            typeof(HorizontalRuleBlock),
+            typeof(AtxHeaderBlock),
             typeof(IndentedCodeBlock),
             typeof(HtmlBlock),
             typeof(ParagraphBlock)

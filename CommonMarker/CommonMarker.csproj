@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blocks\AtxHeaderBlock.cs" />
+    <Compile Include="Blocks\BlockConstructionException.cs" />
     <Compile Include="Blocks\BlockFactory.cs" />
+    <Compile Include="Blocks\HorizontalRuleBlock.cs" />
     <Compile Include="Blocks\HtmlBlock.cs" />
     <Compile Include="Blocks\MultiLineBlock.cs" />
     <Compile Include="Blocks\ParagraphBlock.cs" />
+    <Compile Include="Blocks\SingleLineBlock.cs" />
     <Compile Include="ConsoleApplication\Program.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Blocks\IndentedCodeBlock.cs" />
