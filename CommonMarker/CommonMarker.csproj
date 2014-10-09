@@ -46,15 +46,19 @@
     <Compile Include="Blocks\BlockFactory.cs" />
     <Compile Include="Blocks\HorizontalRuleBlock.cs" />
     <Compile Include="Blocks\HtmlBlock.cs" />
+    <Compile Include="HtmlBuildingException.cs" />
     <Compile Include="Blocks\MultiLineBlock.cs" />
     <Compile Include="Blocks\ParagraphBlock.cs" />
+    <Compile Include="Blocks\SetextHeaderBlock.cs" />
     <Compile Include="Blocks\SingleLineBlock.cs" />
+    <Compile Include="Blocks\UnorderedListBlock.cs" />
     <Compile Include="ConsoleApplication\Program.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Blocks\IndentedCodeBlock.cs" />
+    <Compile Include="Inline.cs" />
     <Compile Include="Md2Html.cs" />
     <Compile Include="Blocks\Block.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="DocumentParser.cs" />
     <Compile Include="ParsingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

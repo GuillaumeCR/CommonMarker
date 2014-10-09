@@ -13,6 +13,7 @@ namespace CommonMarker.Blocks
             typeof(AtxHeaderBlock),
             typeof(IndentedCodeBlock),
             typeof(HtmlBlock),
+            typeof(UnorderedListBlock),
             typeof(ParagraphBlock)
         };
 

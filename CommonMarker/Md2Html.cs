@@ -8,7 +8,7 @@ namespace CommonMarker
 {
     public class Md2Html
     {
-        private readonly Parser parser = new Parser();
+        private readonly DocumentParser parser = new DocumentParser();
 
         public string Convert(string markdown)
         {

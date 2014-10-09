@@ -1,5 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text;
 
 namespace CommonMarker.Tests
 {
@@ -11,8 +12,7 @@ namespace CommonMarker.Tests
 
             var target = new Md2Html();                      
             var actual = target.Convert(input).Replace("\r\n", "\n");
-
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, "input:" + input);
         }
 
         [TestMethod]
