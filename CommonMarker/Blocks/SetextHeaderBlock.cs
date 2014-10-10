@@ -9,7 +9,7 @@ namespace CommonMarker.Blocks
 {
     class SetextHeaderBlock : Block
     {
-
+        private readonly HorizontalRuleBlock hrBlock = new HorizontalRuleBlock();
 
         public bool AcceptsLine(string line)
         {
@@ -41,10 +41,11 @@ namespace CommonMarker.Blocks
             builder.Append("</h" + headerLevel + ">");
         }
 
-        private readonly Regex underlineRegex = new Regex(@"^ {0,3}(-+|=+)\w*$");
+        private readonly Regex underlineRegex = new Regex(@"^ {0,3}(-+|=+)\s*$");
         internal bool AcceptsLine(string currentLine, string nextLine)
         {
             return !string.IsNullOrWhiteSpace(currentLine)
+                && !hrBlock.AcceptsLine(currentLine)
                 && underlineRegex.IsMatch(nextLine);
         }
     }

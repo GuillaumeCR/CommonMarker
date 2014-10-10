@@ -9,11 +9,13 @@ namespace CommonMarker.Blocks
     class ParagraphBlock : MultiLineBlock
     {
         private readonly HorizontalRuleBlock hrBlock = new HorizontalRuleBlock();
+        private readonly AtxHeaderBlock atxBlock = new AtxHeaderBlock();
 
         public override bool AcceptsLine(string line)
         {
             return !string.IsNullOrWhiteSpace(line)
-                && !hrBlock.AcceptsLine(line);
+                && !hrBlock.AcceptsLine(line)
+                && !atxBlock.AcceptsLine(line);
         }
 
         public override void BuildHtml(StringBuilder builder)

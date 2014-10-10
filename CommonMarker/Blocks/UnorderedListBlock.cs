@@ -8,10 +8,14 @@ namespace CommonMarker.Blocks
 {
     class UnorderedListBlock : MultiLineBlock
     {
+        private readonly HorizontalRuleBlock hrBlock = new HorizontalRuleBlock();
+
         public override bool AcceptsLine(string line)
         {
             return line.Length > 1
-                && line.Substring(0, 2) == "- ";
+                && !hrBlock.AcceptsLine(line)
+                && (line.Substring(0, 2) == "- "
+                    || line.Substring(0, 2) == "* ");
         }
 
         public override void BuildHtml(StringBuilder builder)
@@ -22,7 +26,14 @@ namespace CommonMarker.Blocks
                 builder.Append("<li>");
                 if (line.Length > 2)
                 {
-                    builder.Append(line.Substring(2));
+                    if (hrBlock.AcceptsLine(line.Substring(2)))
+                    {
+                        hrBlock.BuildHtml(builder);
+                    }
+                    else
+                    {
+                        builder.Append(line.Substring(2));
+                    }
                 }
                 builder.AppendLine("</li>");
             }

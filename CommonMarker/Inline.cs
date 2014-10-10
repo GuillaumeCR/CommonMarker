@@ -9,6 +9,7 @@ namespace CommonMarker
     class Inline
     {
         private readonly string _raw;
+        private string trimmed;
         private int i;
         public Inline(string raw)
         {
@@ -19,27 +20,28 @@ namespace CommonMarker
         public void BuildHtml(StringBuilder resultBuilder)
         {
             _sb = resultBuilder;
+            trimmed = _raw.Trim();
 
             //Consume string one char at a time.
             //Each method returns true if it was able to process the next char.
             //Methods can increment i if needed.
-            for (i = 0; i < _raw.Length; i++)
+            for (i = 0; i < trimmed.Length; i++)
             {
                 if (EscapedPunctuation()) continue;
                 if (Emphasis()) continue;
-                _sb.Append(_raw[i]);
+                _sb.Append(trimmed[i]);
             }
         }
 
         private bool emphasis = false;
         private bool Emphasis()
         {
-            if (_raw[i] != '*')
+            if (trimmed[i] != '*')
             {
                 return false;
             }
 
-            if (_raw.Replace(" ", "").All(x => x == '*'))
+            if (trimmed.Replace(" ", "").All(x => x == '*'))
             {
                 return false;
             }
@@ -58,11 +60,11 @@ namespace CommonMarker
 
         private bool EscapedPunctuation()
         {
-            if (_raw[i] == '\\'
-                       && i < _raw.Length - 1
-                       && char.IsPunctuation(_raw[i + 1]))
+            if (trimmed[i] == '\\'
+                       && i < trimmed.Length - 1
+                       && char.IsPunctuation(trimmed[i + 1]))
             {
-                _sb.Append(_raw[i + 1]);
+                _sb.Append(trimmed[i + 1]);
                 i++;
                 return true;
             }
